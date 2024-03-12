@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block body %}
+ 
+<div style="padding: 29px; padding-left: 15%; padding-right:15%;">
+    <h2 style="text-align: center; color: red; font-size: 32px;">
+        All ToDO
+    </h2>
+    <div>
+        <form action="save-todo" method="post"enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Title:</label>
+                <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="enter your title">
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Discripstion:</label>
+                <textarea class="form-control"name="desc" id="exampleFormControlTextarea1" rows="3" placeholder="enter your discripstion"></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">upload image:</label>
+                <input type="file" name="imgg" class="form-control" name="title" id="exampleFormControlInput1" placeholder="enter your title">
+              </div>
+
+              <div style="display:flex; justify-content:center;">
+                <button type="Submit" class="btn btn-danger">AddTODO</button>
+
+
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Image</th>
+        <th scope="col">Title</th>
+        <th scope="col">Discription</th>
+        <th scope="col">Addeddate</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in alltodo %}
+       <tr>
+        <th scope="row">{{i.id}}</th>
+        <th scope="row">
+      <img style="    max-width: 130px;" src="/media/{{i.myimage}}">
+      
+      </th>
+        <td>{{i.title}}</td>
+        <td>{{i.discription}}</td>
+        <td>{{i.datetime}}</td>
+       </tr>
+      
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+{% endblock body %}
